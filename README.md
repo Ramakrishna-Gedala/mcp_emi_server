@@ -1,3 +1,7 @@
+# First Setup EMI Calculator
+<img width="867" height="326" alt="image" src="https://github.com/user-attachments/assets/ef879344-85b5-4699-86f5-be5d9e667f86" />
+
+
 # MCP EMI Calculator Server
 
 Lightweight MCP server that exposes loan EMI calculation endpoints to MCP clients (for example, Claude Desktop).
