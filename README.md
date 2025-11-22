@@ -1,17 +1,19 @@
 # First Setup EMI Calculator
-<img width="867" height="326" alt="image" src="https://github.com/user-attachments/assets/ef879344-85b5-4699-86f5-be5d9e667f86" />
 
+<img width="867" height="326" alt="image" src="https://github.com/user-attachments/assets/ef879344-85b5-4699-86f5-be5d9e667f86" />
 
 # MCP EMI Calculator Server
 
 Lightweight MCP server that exposes loan EMI calculation endpoints to MCP clients (for example, Claude Desktop).
 
 ## Features
+
 - STDIO-based FastMCP server that proxies to the REST backend
 - Simple HTTP helper with JSON responses and 10 second timeout
 - Configurable backend base URL via environment variables
 
 ## Prerequisites
+
 - Python 3.10+
 - [uv](https://docs.astral.sh/uv/) for environment management (pip-compatible)
 
@@ -52,29 +54,34 @@ Install `uv` if you do not already have it:
    ```
 
 ## MCP Client Registration (Claude Desktop example)
+
 Add to your `claude_desktop_config.json`:
+
 ```json
 "mcpServers": {
-  "emi-calculator": {
-    "command": "python",
-    "args": ["emi_calculator.py"],
-    "cwd": "<path-to-this-folder>",
-    "env": {
-      "EMI_API_BASE_URL": "http://localhost:3000/api/loan"
-    },
-    "disabled": false
+  "emi-mcp-server": {
+    "command": "uv",
+    "args": [
+        "--from",
+        "git+https://github.com/Ramakrishna-Gedala/mcp-server-deepdive-deployment.git@main",
+        "mcp-server"
+      ]
   }
 }
 ```
 
 ## Configuration (.env)
+
 - `EMI_API_BASE_URL` — base URL of the backend EMI APIs (default: http://localhost:8000/api)
 
 ## Tools exposed
+
 - `calculate_emi` — `{principal, interestRate, tenure, calculation_method?}` → EMI summary
 - `calculate_schedule` — `{principal, interestRate, tenure, calculation_method?}` → amortization schedule
 - `compare_loans` — `{scenarios: [{name, principal, interestRate, tenure, calculation_method?}, ...]}` → side-by-side comparison
+- `calculate_with_prepayment` — `{principal, interestRate, tenure, prepayment_amount, prepayment_frequency, prepayment_start_month, calculation_method?}` → EMI with recurring prepayments
 
 ## Troubleshooting
+
 - Ensure the backend EMI API is running and reachable.
 - Check stderr logs for detailed errors.
