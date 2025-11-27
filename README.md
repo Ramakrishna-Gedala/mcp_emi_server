@@ -58,16 +58,15 @@ Install `uv` if you do not already have it:
 Add to your `claude_desktop_config.json`:
 
 ```json
-"mcpServers": {
-  "emi-mcp-server": {
-    "command": "uv",
-    "args": [
-        "--from",
-        "git+https://github.com/Ramakrishna-Gedala/mcp-server-deepdive-deployment.git@main",
-        "mcp-server"
+ "emiMcpServer": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "mcp_emi_server project path",
+        "run",
+        "emi_calculator.py"
       ]
-  }
-}
+    },
 ```
 
 ## Configuration (.env)
